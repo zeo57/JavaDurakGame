@@ -4,69 +4,133 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+
+
+
 class JavaDurakGame
 {
-  private static final String FilePathName = "/home/zeo57/Desktop/Stupid/Data.txt"; //Linux directory 
+
+  private static final String FilePathName = "/home/zeo57/Desktop/Stupid/Data.txt";
 
   public static void main(String[] args)
   {
+
+      // temp lines down
       char TrumpCard = GetTrumpCard();
-      System.out.print(TrumpCard);
+      System.out.println(TrumpCard);
       System.out.println(FindVerticalLine(1));
+      System.out.println(FileLinesCount());
+      System.out.println(OffencePlayerCards(1, FindVerticalLine(1)));
+      System.out.println(DefencePlayerCards(1, FindVerticalLine(1)));
   }
 
     public static String[] FileRead()
     {
-        int i = 0,h =0;
-        String [] LinesArray;
-        LinesArray = new String[2];
+        int lineNumber = FileLinesCount();
+        int i = 0;
+        String [] linesArray;
+        linesArray = new String[lineNumber];
         try (BufferedReader br = new BufferedReader(new FileReader(FilePathName)))
         {
-	    String sCurrentLine;
-		
-            while ((sCurrentLine = br.readLine()) != null)
-           {
-                LinesArray[i] =(sCurrentLine);
-                h= h+1;// h means lines
-                i++;
-            }
-          } 
-	    catch (IOException e)
-         {
-	     e.printStackTrace();
-         }
 
-   
-          System.out.println(LinesArray[1].substring(kintamasis, LinesArray[1].length()));
-          
-	    return LinesArray;
-	}
+			  String sCurrentLine;
+
+			  while ((sCurrentLine = br.readLine()) != null)
+        {
+
+            linesArray[i] =(sCurrentLine);
+            i++;
+
+        }
+
+		    } catch (IOException e)
+         {
+			e.printStackTrace();
+		    }
+
+        return linesArray;
+	    }
+
+
+      public static int FileLinesCount()
+      {
+
+        int numberOfLines = 0;
+
+          try (BufferedReader br = new BufferedReader(new FileReader(FilePathName)))
+          {
+
+             while ((br.readLine()) != null)
+            {
+              numberOfLines++;
+
+            }
+
+          } catch (IOException e)
+           {
+              e.printStackTrace();
+           }
+
+
+          return numberOfLines;
+        }
+
+
+
+
+
+
+
 
 
     public static  char GetTrumpCard()
     {
+
         String[] testing = FileRead();
         char TrumpCard = testing[0].charAt(0);
 
         return TrumpCard;
     }
 
-    public static int FindVerticalLine(int LineNumber)
+    public static int FindVerticalLine(int lineNumber)
     {
         String[]  Array = FileRead();
-        int kintamasis = (Array[LineNumber].indexOf("|"));
+        int verticalLinePosition = (Array[lineNumber].indexOf("|"));
 
-        return kintamasis;
+        return verticalLinePosition;
     }
 
 
 
-/*
-    public static String[] OffencePlayerCards()
+
+
+    public static String OffencePlayerCards(int lineNumber, int verticalLinePosition)
     {
+        String[] array = FileRead();
+        String loadingArray;
 
+        loadingArray =  array[lineNumber].substring(0, (array[lineNumber].length()-(verticalLinePosition + 2)));
+
+        return loadingArray;
     }
-*/
+
+
+
+
+    public static String DefencePlayerCards(int lineNumber, int verticalLinePosition)
+      {
+        String[] array = FileRead();
+        String loadingArray;
+
+        loadingArray =  array[lineNumber].substring(verticalLinePosition + 2 , array[lineNumber].length());
+
+        return loadingArray;
+      }
+
+
+
+
+
 
 
 
@@ -75,4 +139,5 @@ class JavaDurakGame
 
 
 }
+
 
