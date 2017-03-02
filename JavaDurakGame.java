@@ -22,7 +22,8 @@ class JavaDurakGame
       System.out.println(FileLinesCount());
       System.out.println(OffencePlayerCards(1, FindVerticalLine(1)));
       System.out.println(DefencePlayerCards(1, FindVerticalLine(1)));
-      StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1))); //fix return 
+      System.out.println((StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1)))));
+      System.out.println(branchIfPlayerHaveNonTrumpCard((StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1)))), TrumpCard) );
 
   }
 
@@ -130,7 +131,7 @@ class JavaDurakGame
       }
 
 
-    public static Character[] StringLineConverterToCharArray(String lineOfStringWicthHaveTobeConverted)
+    public static char[] StringLineConverterToCharArray(String lineOfStringWicthHaveTobeConverted)
     {
 
         if (lineOfStringWicthHaveTobeConverted == null)
@@ -139,12 +140,12 @@ class JavaDurakGame
         }
 
         int lengthOfString = lineOfStringWicthHaveTobeConverted.length();
-        Character[] charArray = new Character[lengthOfString];
+        char[] charArray = new char [lengthOfString];
 
         for (int i = 0; i < lengthOfString ; i++)
         {
-            charArray[i] = new Character(lineOfStringWicthHaveTobeConverted.charAt(i));
-            System.out.print(charArray[i]);//convert array to char in other for using purpose lululululul -.-
+            charArray[i] = (lineOfStringWicthHaveTobeConverted.charAt(i));
+            //System.out.print(charArray[i]);//convert array to char in other for using purpose lululululul -.-
         }
 
         return charArray;
@@ -154,11 +155,56 @@ class JavaDurakGame
 
 
 
+     public static int branchIfPlayerHaveNonTrumpCard(char[] charArray, char TrumpCard)
+     {
+          int cardsNumber = 0, trumpCardVariableCount = 0;
+
+
+
+
+
+
+          for (int i = 0 ; i < charArray.length; i++)
+          {
+              if(charArray[i] != ' ')
+              {
+                  if  (charArray[i] == TrumpCard)
+                  {
+                      trumpCardVariableCount ++;
+                      cardsNumber ++;
+                  };
+                  if (charArray[i] != TrumpCard)
+                  {
+                    cardsNumber ++;
+                  }
+              }
+
+          }
+
+          return  ((cardsNumber/2) - trumpCardVariableCount);
+     }
+
+
+     public static void findLowestOfencePlayerCard(int nonTrumpcard)
+     {
+        if(nonTrumpcard == 0)
+        {
+
+        }
+
+        if (nonTrumpcard != 0)
+        {
+
+        }
+     }
+
+
+     //static method optimize
+
+
 
 
 
 
 
 }
-
-
