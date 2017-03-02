@@ -22,6 +22,8 @@ class JavaDurakGame
       System.out.println(FileLinesCount());
       System.out.println(OffencePlayerCards(1, FindVerticalLine(1)));
       System.out.println(DefencePlayerCards(1, FindVerticalLine(1)));
+      StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1))); //fix return 
+
   }
 
     public static String[] FileRead()
@@ -128,7 +130,26 @@ class JavaDurakGame
       }
 
 
+    public static Character[] StringLineConverterToCharArray(String lineOfStringWicthHaveTobeConverted)
+    {
 
+        if (lineOfStringWicthHaveTobeConverted == null)
+        {
+            return null;
+        }
+
+        int lengthOfString = lineOfStringWicthHaveTobeConverted.length();
+        Character[] charArray = new Character[lengthOfString];
+
+        for (int i = 0; i < lengthOfString ; i++)
+        {
+            charArray[i] = new Character(lineOfStringWicthHaveTobeConverted.charAt(i));
+            System.out.print(charArray[i]);//convert array to char in other for using purpose lululululul -.-
+        }
+
+        return charArray;
+
+     }
 
 
 
