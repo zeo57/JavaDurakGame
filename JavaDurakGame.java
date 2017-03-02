@@ -12,54 +12,18 @@ class JavaDurakGame
 
   private static final String FilePathName = "/home/zeo57/Desktop/Stupid/Data.txt";
 
+  public static void main(String[] args)
+  {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public static void main(String[] args){
-      String[] someNumbers = FileRead();
-      //do whatever you want with them...
-      System.out.println(Arrays.toString(someNumbers));
-
-
-
-
-
+          getFirsPlayerCardArray();
 
   }
 
     public static String[] FileRead()
     {
-      int i = 0;
+      int i = 0,h =0;
         String [] LinesArray;
-        LinesArray = new String[10];
+        LinesArray = new String[2];
         try (BufferedReader br = new BufferedReader(new FileReader(FilePathName)))
         {
 
@@ -69,6 +33,7 @@ class JavaDurakGame
         {
 
             LinesArray[i] =(sCurrentLine);
+            h= h+1;// h means lines
           i++;
         }
 
@@ -77,20 +42,23 @@ class JavaDurakGame
 			e.printStackTrace();
 		    }
 
-
-
+        //reading file change to char
         return LinesArray;
 	}
 
 
+    public static  char getFirsPlayerCardArray()
+    {
+        char TrumpCard =' ';
+
+        String[] testing = FileRead();
+         System.out.println(Arrays.toString(testing));
+         System.out.println(testing[0]);
+         System.out.println(testing[1]);
 
 
-
-
-
-
-
-
+         return TrumpCard;
+    }
 
 
 }
