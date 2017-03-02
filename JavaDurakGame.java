@@ -18,17 +18,16 @@ class JavaDurakGame
       // temp lines down
       char TrumpCard = GetTrumpCard();
       System.out.println(TrumpCard);
-      System.out.println(FindVerticalLine(1));
-      System.out.println(FileLinesCount());
-      System.out.println(OffencePlayerCards(1, FindVerticalLine(1)));
-      System.out.println(DefencePlayerCards(1, FindVerticalLine(1)));
-      System.out.println((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))));
-      System.out.println(branchIfPlayerHaveNonTrumpCard((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))), TrumpCard) );
+      //System.out.println(FindVerticalLine(1));
+      //System.out.println(FileLinesCount());
+      //System.out.println(OffencePlayerCards(1, FindVerticalLine(1)));
+      //System.out.println(DefencePlayerCards(1, FindVerticalLine(1)));
+      //System.out.println((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))));
+      //System.out.println(branchIfPlayerHaveNonTrumpCard((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))), TrumpCard) );
 
       int  minPosition =(getMinValue((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))), TrumpCard));
-
-
-      System.out.println(output(minPosition , (StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))))));
+      output( minPosition, (StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))) );
+      //System.out.println(output(minPosition , (StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))))));
 
 
 
@@ -311,19 +310,45 @@ class JavaDurakGame
           System.out.print(rankStringArray[i]);
         }
 
-    return minimumValuePositionInArray+1;
+    return minimumValuePositionInArray;
 }
 
-
-
-
-    public static int   output(int position,  char[] array )
+    public static char SimbolChanger(char simbol)
     {
-      System.out.println(array);
-      Array = 
-      System.out.println(array[position]+ "   ");
-      //problem whit return 
-      return (array[position + 1]);
+      char simbolReturn = simbol;
+
+      if(simbol == ('C'))
+      {
+          simbolReturn = '♣';
+      }
+      if(simbol == ('D'))
+      {
+          simbolReturn = '♦';
+      }
+      if(simbol == ('H'))
+      {
+          simbolReturn ='♥';
+      }
+      if(simbol == ('S'))
+      {
+          simbolReturn = '♠';
+      }
+        return simbolReturn;
+    }
+
+
+    public static void output(int position,  char[] array )
+    {
+        int gameVariable = 1, TurnVariable = 1; //line counting next quest
+
+        System.out.println("\n");
+        System.out.println("### Game " + gameVariable);
+        System.out.println("Turn " + TurnVariable);
+        System.out.print("Atack with " + SimbolChanger(array[position-1]));
+        System.out.println(" " + array[position]);
+
+
+
     }
 
 
