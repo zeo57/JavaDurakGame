@@ -26,13 +26,33 @@ class JavaDurakGame
       //System.out.println(branchIfPlayerHaveNonTrumpCard((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))), TrumpCard) );
 
       int  minPosition =(getMinValue((StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))), TrumpCard));
-      output( minPosition, (StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))) );
+    //  output( minPosition, (StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)))) );
       //System.out.println(output(minPosition , (StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))))));
 
+      // cardSuites D C S H
+      // card ranks 2 3 4 5 6 7 8 9 etc..
+      //  char variable = Position(StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))),minPosition+1);
+    //    char variable1 = Position(StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))),minPosition);
+
+  //  System.out.println(getCard(StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1))), TrumpCard, variable , variable1 ));
+      //  public static int getCardPositionArray(char[] playerArray, char trumpCard, char cardSuites, char cardRank)
+      int position = getCardPositionArray( StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1))), TrumpCard, Position(StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))), minPosition) , Position(StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1))), minPosition + 1));
+
+/*
+      Position(StringLineConverterToCharArray(OffencePlayerCards(1, FindVerticalLine(1)), minPosition)
+      minPosition
 
 
+      public static char Position(char[] array, int position)
+      {
+         char variable = array[position];
+         return variable;
+
+      }
 
 
+    StringLineConverterToCharArray(DefencePlayerCards(1, FindVerticalLine(1)));
+*/
 
 
   }
@@ -122,7 +142,7 @@ class JavaDurakGame
         String[] array = FileRead();
         String loadingArray;
 
-        loadingArray =  array[lineNumber].substring(0, ((array[lineNumber].length()-1) -(verticalLinePosition + 2)));
+        loadingArray =  array[lineNumber].substring(0, ((array[lineNumber].length()) -(verticalLinePosition + 2)));
 
         return loadingArray;
     }
@@ -209,6 +229,141 @@ class JavaDurakGame
 
 
         }
+     }
+
+
+     public static int ConverterCharToInt(char cardRank)
+     {
+        int cardRankInt;
+
+       if (cardRank == ('A'))
+         {
+           cardRankInt = 14;
+         }
+       if (cardRank == ('K'))
+         {
+           cardRankInt = 13;
+         }
+       if(cardRank == ('Q'))
+         {
+           cardRankInt = 12;
+         }
+       if(cardRank == ('J'))
+         {
+           cardRankInt = 11;
+         }
+       if(cardRank == ('T'))
+         {
+           cardRankInt = 10;
+         }
+         else
+         {
+           cardRankInt = Integer.parseInt(String.valueOf(cardRank));
+         }
+
+         return cardRankInt;
+     }
+     public static int ConverterStringToInt(String cardRank)
+     {
+        int cardRankInt;
+
+       if (cardRank.equals("A"))
+         {
+           cardRankInt =14;
+         }
+       if (cardRank.equals("K"))
+         {
+           cardRankInt = 13;
+         }
+       if(cardRank.equals("Q"))
+         {
+           cardRankInt = 12;
+         }
+       if(cardRank.equals("J"))
+         {
+           cardRankInt = 11;
+         }
+       if(cardRank.equals("T"))
+         {
+           cardRankInt = 10;
+         }
+         else
+         {
+           cardRankInt = Integer.parseInt(cardRank);
+         }
+
+         return cardRankInt;
+     }
+
+
+     public static int getCardPositionArray(char[] playerArray, char trumpCard, char cardSuites, char cardRank)
+      {
+        int  cardRankInt = ConverterCharToInt(cardRank);     //card rank 2 3 4 5 6 7 8 9 etc
+        int cardsNumber = 0, minimumValue = 14, minimumValuePositionInArray = 0;
+
+
+
+
+
+        for (int i = 0 ; i < playerArray.length; i++)
+        {
+            if(playerArray[i] != ' ')
+            {
+              cardsNumber ++;
+            }
+        }
+
+        if(trumpCard == cardSuites)
+        {
+          for (int i = 0; i < cardsNumber; i = i + 3)
+            {
+               if(playerArray[i] == cardSuites)
+               {
+                 if(ConverterCharToInt(playerArray[i + 1]) <= cardRankInt)
+                 {
+                   cardRankInt = ConverterCharToInt(playerArray[i+1]);
+                   minimumValuePositionInArray = i + 1;
+                 }
+               }
+             }
+         }
+        if(trumpCard != cardSuites)
+        {
+          for(int i = 0; i < cardsNumber; i = i + 3)
+          {
+            if(playerArray[i] != cardSuites)
+            {
+              if(ConverterCharToInt(playerArray[i + 1]) <= cardRankInt)
+              {
+                cardRankInt = ConverterCharToInt(playerArray[i+1]);
+                minimumValuePositionInArray = i + 1;
+              }
+            }
+          }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+     return minimumValuePositionInArray;
+}
+
+
+
+
+     public static char Position(char[] array, int position)
+     {
+        char variable = array[position];
+        return variable;
+
      }
 
 
@@ -340,15 +495,16 @@ class JavaDurakGame
     public static void output(int position,  char[] array )
     {
         int gameVariable = 1, TurnVariable = 1; //line counting next quest
-
+        String tVariable = " ";
         System.out.println("\n");
         System.out.println("### Game " + gameVariable);
         System.out.println("Turn " + TurnVariable);
         System.out.print("Atack with " + SimbolChanger(array[position-1]));
         System.out.println(" " + array[position]);
-
-
-
+        System.out.println("trump: " + SimbolChanger(GetTrumpCard()));
+        System.out.println("o: P1[" + OffencePlayerCards(1, FindVerticalLine(1)) + "]");
+        System.out.println("d: P2[" + DefencePlayerCards(1, FindVerticalLine(1)) + "]");
+        System.out.println("t: " + tVariable);
     }
 
 
