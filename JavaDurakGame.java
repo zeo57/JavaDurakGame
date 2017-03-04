@@ -492,13 +492,52 @@ class JavaDurakGame
     }
 
 
-    public static void output(int position,  char[] array )
+    public static void output(int gameVariable, int TurnVariable, boolean stop)
     {
-        int gameVariable = 1, TurnVariable = 1; //line counting next quest
-        String tVariable = " ";
-        System.out.println("\n");
         System.out.println("### Game " + gameVariable);
+        System.out.println("/n");
         System.out.println("Turn " + TurnVariable);
+        while(stop == true)
+        {
+            if (firstmovee == true)
+            {
+              System.out.println("Attack with"+ SimbolChanger(/*Simbol*/) + value);
+              
+            }
+            if(move.equals("passig"))
+            {
+              System.out.println("Passing against " + SimbolChanger(/* Simbol*/)+ value + " with" + SimbolChanger(/* Simbol */ ) + value + "WrappedArray(" + SimbolChanger(/* Simbol*/) + value +"): ");
+            }
+            if(move.equals("cantpassing"))
+            {
+              System.out.println("Cannot pass against" + SimbolChanger(/* Simbol */) + value + ":");
+            }
+            if(move.equals("Def"))
+            {
+              System.out.println("Deffending against List("+SimbolChanger(/*Simbol*/) + value +  )
+            } 
+
+
+
+
+            System.out.println("o":)
+            
+        }
+        
+        
+      
+    }
+
+
+
+
+
+
+
+
+    public static void StateOutput(int  witchPlayerStarts  )
+    {
+      
         System.out.print("Atack with " + SimbolChanger(array[position-1]));
         System.out.println(" " + array[position]);
         System.out.println("trump: " + SimbolChanger(GetTrumpCard()));
